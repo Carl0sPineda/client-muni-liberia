@@ -14,25 +14,18 @@ import { useEffect, useRef, useState } from "react";
 import { Close, Send } from "@mui/icons-material";
 import PasswordField from "./PasswordField";
 import GoogleOneTapLogin from "./GoogleOneTapLogin";
+import { login, register } from "../../actions/user";
 
 const Login = () => {
   const ColoredDialog = styled(Dialog)(({ theme }) => ({
-    // Estilo para el fondo del dialog (blur)
-    backdropFilter: "blur(6px)", // Ajusta el valor según el nivel de desenfoque deseado
-
-    // Estilo para el contenido del dialog (opcional)
+    backdropFilter: "blur(6px)",
     "& .MuiDialogContent-root": {
       padding: theme.spacing(2),
     },
   }));
 
   const CustomDialogContent = styled(DialogContent)(({ theme }) => ({
-    // Cambiar el color del contenido del Dialog
-    color: "green", // Cambia el color según tus preferencias
-    backgroundColor: "lightgray", // Cambia el color de fondo según tus preferencias
     padding: theme.spacing(2),
-
-    // Otros estilos específicos para el contenido del Dialog
     "& p": {
       fontSize: "18px",
       margin: 0,
@@ -56,28 +49,21 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    //TESTING LOADING
-    dispatch({ type: "START_LOADING" });
-
-    setTimeout(() => {
-      dispatch({ type: "END_LOADING" });
-    }, 6000);
-
-    //testing
-
+    const email = emailRef.current.value;
     const password = passwordRef.current.value;
+    if (!isRegister) return login({ email, password }, dispatch);
+    const name = nameRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
-    if (password !== confirmPassword) {
-      dispatch({
+    if (password !== confirmPassword)
+      return dispatch({
         type: "UPDATE_ALERT",
         payload: {
           open: true,
           severity: "error",
-          message: "Contraseñas no coinciden",
+          message: "Las contraseñas deben coincidir",
         },
       });
-    }
+    register({ name, email, password }, dispatch);
   };
 
   useEffect(() => {
