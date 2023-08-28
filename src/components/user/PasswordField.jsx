@@ -15,9 +15,9 @@ const PasswordField = ({
   const handleMouseDown = (e) => {
     e.preventDefault();
   };
+
   return (
     <TextField
-      autoFocus
       margin="normal"
       variant="standard"
       id={id}

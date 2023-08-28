@@ -3,8 +3,10 @@ import { Avatar, Badge, Box, IconButton, Tooltip } from "@mui/material";
 import React, { useState } from "react";
 import { useValue } from "../../context/ContextProvider";
 import UserMenu from "./UserMenu";
+import useCheckToken from "../../hooks/useCheckToken";
 
 const UserIcons = () => {
+  useCheckToken();
   const {
     state: { currentUser },
   } = useValue();
