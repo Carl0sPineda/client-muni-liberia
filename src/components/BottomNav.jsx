@@ -5,7 +5,8 @@ import {
   BottomNavigationAction,
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { LocationOn, Bed, AddLocationAlt } from "@mui/icons-material";
+import CollectionsIcon from "@mui/icons-material/Collections";
+import { LocationOn, AddLocationAlt } from "@mui/icons-material";
 import Posts from "./posts/Posts";
 import Map from "./map/Map";
 import AddPost from "./addPost/AddPost";
@@ -36,7 +37,7 @@ const BottomNav = () => {
           onChange={(e, newValue) => setValue(newValue)}
         >
           <BottomNavigationAction label="Mapa" icon={<LocationOn />} />
-          <BottomNavigationAction label="Fotos" icon={<Bed />} />
+          <BottomNavigationAction label="Fotos" icon={<CollectionsIcon />} />
           <BottomNavigationAction label="Añadir" icon={<AddLocationAlt />} />
         </BottomNavigation>
       </Paper>
