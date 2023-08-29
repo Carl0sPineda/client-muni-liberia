@@ -1,6 +1,4 @@
 import fetchData from "./utils/fetchData";
-import { v4 as uuidv4 } from "uuid";
-import uploadFile from "../firebase/uploadFile";
 
 const url = import.meta.env.VITE_SERVER_URL + "/users";
 
@@ -42,17 +40,9 @@ export const login = async (user, dispatch) => {
 export const updateProfile = async (currentUser, updatedFields, dispatch) => {
   dispatch({ type: "START_LOADING" });
 
-  const { name, file } = updatedFields;
+  const { name } = updatedFields;
   let body = { name };
   try {
-    if (file) {
-      const imageName = uuidv4() + "." + file?.name?.split(".")?.pop();
-      const photoURL = await uploadFile(
-        file,
-        `profile/${currentUser?.id}/${imageName}`
-      );
-      body = { ...body, photoURL };
-    }
     const result = await fetchData(
       {
         url: url + "/updateProfile",
@@ -72,10 +62,6 @@ export const updateProfile = async (currentUser, updatedFields, dispatch) => {
           message: "Tu perfil se ha actualizado con éxito!",
         },
       });
-      // dispatch({
-      //   type: "UPDATE_PROFILE",
-      //   payload: { open: false, file: null, photoURL: result.photoURL },
-      // });
     }
   } catch (error) {
     dispatch({
