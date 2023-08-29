@@ -19,23 +19,24 @@ const NavBar = () => {
   } = useValue();
 
   return (
-    <AppBar>
-      <Container maxWidth="lg">
-        <Toolbar disableGutters>
-          <Box sx={{ mr: 1 }}>
-            <IconButton size="large" color="inherit">
-              <Menu />
-            </IconButton>
-          </Box>
-          <Typography
-            variant="h6"
-            component="h1"
-            noWrap
-            sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
-          >
-            Bienvenido
-          </Typography>
-          {/* <Typography
+    <>
+      <AppBar>
+        <Container maxWidth="lg">
+          <Toolbar disableGutters>
+            <Box sx={{ mr: 1 }}>
+              <IconButton size="large" color="inherit">
+                <Menu />
+              </IconButton>
+            </Box>
+            <Typography
+              variant="h6"
+              component="h1"
+              noWrap
+              sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+            >
+              Bienvenido
+            </Typography>
+            {/* <Typography
             variant="h6"
             component="h1"
             noWrap
@@ -43,20 +44,22 @@ const NavBar = () => {
           >
             YRW
           </Typography> */}
-          {!currentUser ? (
-            <Button
-              color="inherit"
-              startIcon={<Lock />}
-              onClick={() => dispatch({ type: "OPEN_LOGIN" })}
-            >
-              Login
-            </Button>
-          ) : (
-            <UserIcons />
-          )}
-        </Toolbar>
-      </Container>
-    </AppBar>
+            {!currentUser ? (
+              <Button
+                color="inherit"
+                startIcon={<Lock />}
+                onClick={() => dispatch({ type: "OPEN_LOGIN" })}
+              >
+                Login
+              </Button>
+            ) : (
+              <UserIcons />
+            )}
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Toolbar />
+    </>
   );
 };
 
