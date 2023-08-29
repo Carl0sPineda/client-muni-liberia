@@ -1,8 +1,12 @@
 import { Logout, Settings } from "@mui/icons-material";
 import { ListItemIcon, Menu, MenuItem } from "@mui/material";
+import React from "react";
 import { useValue } from "../../context/ContextProvider";
+import useCheckToken from "../../hooks/useCheckToken";
+import Profile from "./Profile";
 
 const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
+  useCheckToken();
   const {
     dispatch,
     state: { currentUser },
@@ -11,55 +15,44 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
     setAnchorUserMenu(null);
   };
 
-  const testAuthorization = async () => {
-    const url = import.meta.env.VITE_SERVER_URL + "/posts";
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${currentUser.token}`,
-        },
-      });
-      const data = await response.json();
-
-      console.log(data);
-      if (!data.success) {
-        if (response.status === 401)
-          dispatch({ type: "UPDATE_USER", payload: null });
-        throw new Error(data.message);
-      }
-    } catch (error) {
-      dispatch({
-        type: "UPDATE_ALERT",
-        payload: { open: true, severity: "error", message: error.message },
-      });
-      console.log(error);
-    }
-  };
-
   return (
-    <Menu
-      anchorEl={anchorUserMenu}
-      open={Boolean(anchorUserMenu)}
-      onClose={handleCloseUserMenu}
-      onClick={handleCloseUserMenu}
-    >
-      <MenuItem onClick={testAuthorization}>
-        <ListItemIcon>
-          <Settings fontSize="small" />
-        </ListItemIcon>
-        Perfil
-      </MenuItem>
-      <MenuItem
-        onClick={() => dispatch({ type: "UPDATE_USER", payload: null })}
+    <>
+      <Menu
+        anchorEl={anchorUserMenu}
+        open={Boolean(anchorUserMenu)}
+        onClose={handleCloseUserMenu}
+        onClick={handleCloseUserMenu}
       >
-        <ListItemIcon>
-          <Logout fontSize="small" />
-        </ListItemIcon>
-        Cerrar Sesión
-      </MenuItem>
-    </Menu>
+        {!currentUser.google && (
+          <MenuItem
+            onClick={() =>
+              dispatch({
+                type: "UPDATE_PROFILE",
+                payload: {
+                  open: true,
+                  file: null,
+                  photoURL: currentUser?.photoURL,
+                },
+              })
+            }
+          >
+            <ListItemIcon>
+              <Settings fontSize="small" />
+            </ListItemIcon>
+            Perfil
+          </MenuItem>
+        )}
+        <MenuItem
+          onClick={() => dispatch({ type: "UPDATE_USER", payload: null })}
+        >
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Cerrar sesión
+        </MenuItem>
+      </Menu>
+      <Profile />
+    </>
   );
 };
 

@@ -36,6 +36,7 @@ const Login = () => {
     state: { openLogin },
     dispatch,
   } = useValue();
+
   const [title, setTitle] = useState("Login");
   const [isRegister, setIsRegister] = useState(false);
   const nameRef = useRef();
