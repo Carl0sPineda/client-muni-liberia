@@ -7,17 +7,23 @@ import {
   StepButton,
   Stepper,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useValue } from "../../context/ContextProvider";
 import AddDetails from "./addDetails/AddDetails";
 import AddImages from "./addImages/AddImages";
 import AddLocation from "./addLocation/AddLocation";
+
 const AddPost = () => {
+  const {
+    state: { images },
+  } = useValue();
   const [activeStep, setActiveStep] = useState(0);
   const [steps, setSteps] = useState([
     { label: "Ubicación", completed: false },
     { label: "Detalles", completed: false },
     { label: "Imágenes", completed: false },
   ]);
+
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
       setActiveStep((activeStep) => activeStep + 1);
@@ -26,14 +32,31 @@ const AddPost = () => {
       setActiveStep(stepIndex);
     }
   };
+
   const checkDisabled = () => {
     if (activeStep < steps.length - 1) return false;
     const index = findUnfinished();
     if (index !== -1) return false;
     return true;
   };
+
   const findUnfinished = () => {
     return steps.findIndex((step) => !step.completed);
+  };
+
+  useEffect(() => {
+    if (images.length) {
+      if (!steps[2].completed) setComplete(2, true);
+    } else {
+      if (steps[2].completed) setComplete(2, false);
+    }
+  }, [images]);
+
+  const setComplete = (index, status) => {
+    setSteps((steps) => {
+      steps[index].completed = status;
+      return [...steps];
+    });
   };
 
   return (
@@ -70,10 +93,10 @@ const AddPost = () => {
           disabled={!activeStep}
           onClick={() => setActiveStep((activeStep) => activeStep - 1)}
         >
-          Back
+          Regresar
         </Button>
         <Button disabled={checkDisabled()} onClick={handleNext}>
-          Next
+          Siguiente
         </Button>
       </Stack>
     </Container>

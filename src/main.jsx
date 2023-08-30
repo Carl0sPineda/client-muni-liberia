@@ -5,9 +5,7 @@ import ContextProvider from "./context/ContextProvider.jsx";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <ContextProvider>
-      <App />
-    </ContextProvider>
-  </React.StrictMode>
+  <ContextProvider>
+    <App />
+  </ContextProvider>
 );
