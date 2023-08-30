@@ -15,15 +15,14 @@ import AddLocation from "./addLocation/AddLocation";
 
 const AddPost = () => {
   const {
-    state: { images },
+    state: { images, details },
   } = useValue();
   const [activeStep, setActiveStep] = useState(0);
   const [steps, setSteps] = useState([
-    { label: "Ubicación", completed: false },
+    { label: "ubicación", completed: false },
     { label: "Detalles", completed: false },
     { label: "Imágenes", completed: false },
   ]);
-
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
       setActiveStep((activeStep) => activeStep + 1);
@@ -32,14 +31,12 @@ const AddPost = () => {
       setActiveStep(stepIndex);
     }
   };
-
   const checkDisabled = () => {
     if (activeStep < steps.length - 1) return false;
     const index = findUnfinished();
     if (index !== -1) return false;
     return true;
   };
-
   const findUnfinished = () => {
     return steps.findIndex((step) => !step.completed);
   };
@@ -51,7 +48,13 @@ const AddPost = () => {
       if (steps[2].completed) setComplete(2, false);
     }
   }, [images]);
-
+  useEffect(() => {
+    if (details.title.length > 4 && details.description.length > 9) {
+      if (!steps[1].completed) setComplete(1, true);
+    } else {
+      if (steps[1].completed) setComplete(1, false);
+    }
+  }, [details]);
   const setComplete = (index, status) => {
     setSteps((steps) => {
       steps[index].completed = status;
