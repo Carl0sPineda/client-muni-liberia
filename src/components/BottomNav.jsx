@@ -10,6 +10,8 @@ import { LocationOn, AddLocationAlt } from "@mui/icons-material";
 import Posts from "./posts/Posts";
 import Map from "./map/Map";
 import AddPost from "./addPost/AddPost";
+import Protected from "./protected/Protected";
+import { useValue } from "../context/ContextProvider";
 
 const BottomNav = () => {
   const [value, setValue] = useState(0);
@@ -18,13 +20,22 @@ const BottomNav = () => {
     ref.current.ownerDocument.body.scrollTop = 0;
   }, [value]);
 
+  const {
+    state: { currentUser },
+  } = useValue();
+
   return (
     <Box ref={ref}>
       {
         {
           0: <Map />,
           1: <Posts />,
-          2: <AddPost />,
+
+          2: (
+            <Protected>
+              <AddPost setPage={setValue} />
+            </Protected>
+          ),
         }[value]
       }
       <Paper
@@ -38,7 +49,14 @@ const BottomNav = () => {
         >
           <BottomNavigationAction label="Mapa" icon={<LocationOn />} />
           <BottomNavigationAction label="Fotos" icon={<CollectionsIcon />} />
-          <BottomNavigationAction label="Añadir" icon={<AddLocationAlt />} />
+          <BottomNavigationAction
+            label="Añadir"
+            icon={<AddLocationAlt />}
+            // style={{
+            //   display:
+            //     currentUser?.name === "Carlos Pineda " ? "block" : "none",
+            // }}
+          />
         </BottomNavigation>
       </Paper>
     </Box>

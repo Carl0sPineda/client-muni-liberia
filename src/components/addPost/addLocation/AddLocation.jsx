@@ -69,7 +69,7 @@ const AddLocation = () => {
       <MapContainer
         ref={mapRef}
         center={[lat, lng]}
-        zoom={18}
+        zoom={14}
         style={{ height: "100%" }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

@@ -7,22 +7,27 @@ import {
   StepButton,
   Stepper,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Send } from "@mui/icons-material";
+import { useEffect, useState } from "react";
 import { useValue } from "../../context/ContextProvider";
 import AddDetails from "./addDetails/AddDetails";
 import AddImages from "./addImages/AddImages";
 import AddLocation from "./addLocation/AddLocation";
+import { createPost } from "../../actions/post";
 
-const AddPost = () => {
+const AddPost = ({ setPage }) => {
   const {
-    state: { images, details, location },
+    state: { images, details, location, currentUser },
+    dispatch,
   } = useValue();
   const [activeStep, setActiveStep] = useState(0);
   const [steps, setSteps] = useState([
-    { label: "ubicación", completed: false },
+    { label: "Ubicación", completed: false },
     { label: "Detalles", completed: false },
     { label: "Imágenes", completed: false },
   ]);
+
+  const [showSubmit, setShowSubmit] = useState(false);
 
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
@@ -75,6 +80,25 @@ const AddPost = () => {
     });
   };
 
+  const handleSubmit = () => {
+    const post = {
+      lng: location.lng,
+      lat: location.lat,
+      title: details.title,
+      description: details.description,
+      images,
+    };
+    createPost(post, currentUser, dispatch, setPage);
+  };
+
+  useEffect(() => {
+    if (findUnfinished() === -1) {
+      if (!showSubmit) setShowSubmit(true);
+    } else {
+      if (showSubmit) setShowSubmit(false);
+    }
+  }, [steps]);
+
   return (
     <Container sx={{ my: 4 }}>
       <Stepper
@@ -91,7 +115,7 @@ const AddPost = () => {
           </Step>
         ))}
       </Stepper>
-      <Box>
+      <Box sx={{ pb: 7 }}>
         {
           {
             0: <AddLocation />,
@@ -99,22 +123,30 @@ const AddPost = () => {
             2: <AddImages />,
           }[activeStep]
         }
+        <Stack direction="row" sx={{ pt: 2, justifyContent: "space-around" }}>
+          <Button
+            color="inherit"
+            disabled={!activeStep}
+            onClick={() => setActiveStep((activeStep) => activeStep - 1)}
+          >
+            Regresar
+          </Button>
+          <Button disabled={checkDisabled()} onClick={handleNext}>
+            Siguiente
+          </Button>
+        </Stack>
+        {showSubmit && (
+          <Stack sx={{ alignItems: "center" }}>
+            <Button
+              variant="contained"
+              endIcon={<Send />}
+              onClick={handleSubmit}
+            >
+              Enviar
+            </Button>
+          </Stack>
+        )}
       </Box>
-      <Stack
-        direction="row"
-        sx={{ pt: 2, pb: 7, justifyContent: "space-around" }}
-      >
-        <Button
-          color="inherit"
-          disabled={!activeStep}
-          onClick={() => setActiveStep((activeStep) => activeStep - 1)}
-        >
-          Regresar
-        </Button>
-        <Button disabled={checkDisabled()} onClick={handleNext}>
-          Siguiente
-        </Button>
-      </Stack>
     </Container>
   );
 };

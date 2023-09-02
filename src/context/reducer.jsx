@@ -33,6 +33,14 @@ const reducer = (state, action) => {
     case "UPDATE_LOCATION":
       return { ...state, location: action.payload };
 
+    case "RESET_POST":
+      return {
+        ...state,
+        images: [],
+        details: { title: "", description: "" },
+        location: { lng: 0, lat: 0 },
+      };
+
     default:
       throw new Error("Acción inválida!");
   }
