@@ -28,3 +28,10 @@ export const createPost = async (post, currentUser, dispatch, setPage) => {
 
   dispatch({ type: "END_LOADING" });
 };
+
+export const getPosts = async (dispatch) => {
+  const result = await fetchData({ url, method: "GET" }, dispatch);
+  if (result) {
+    dispatch({ type: "UPDATE_POSTS", payload: result });
+  }
+};

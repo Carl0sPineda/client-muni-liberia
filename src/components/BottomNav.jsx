@@ -40,7 +40,17 @@ const BottomNav = () => {
       }
       <Paper
         elevation={3}
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 2 }}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 9999,
+          // width: { xs: "100%", sm: "100%", md: "500px" }, // Ancho diferente para diferentes resoluciones
+          // maxWidth: { xs: "none", sm: "none", md: "500px" }, // Máximo ancho para dispositivos de escritorio
+          // marginLeft: "auto", // Centra horizontalmente en escritorio
+          // marginRight: "auto", // Centra horizontalmente en escritorio
+        }}
       >
         <BottomNavigation
           showLabels

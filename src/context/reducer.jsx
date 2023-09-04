@@ -41,6 +41,9 @@ const reducer = (state, action) => {
         location: { lng: 0, lat: 0 },
       };
 
+    case "UPDATE_POSTS":
+      return { ...state, posts: action.payload };
+
     default:
       throw new Error("Acción inválida!");
   }

@@ -32,9 +32,12 @@ const NavBar = () => {
               variant="h6"
               component="h1"
               noWrap
-              sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+              }}
             >
-              Bienvenido
+              Sitios Históricos y Arquitectónicos Liberia
             </Typography>
             {/* <Typography
             variant="h6"
