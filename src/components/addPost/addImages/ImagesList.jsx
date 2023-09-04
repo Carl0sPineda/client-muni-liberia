@@ -20,9 +20,7 @@ const ImagesList = () => {
     const imageName = image?.split(`${currentUser?.id}%2F`)[1]?.split("?")[0];
     try {
       await deleteFile(`posts/${currentUser?.id}/${imageName}`);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   return (
     <ImageList

@@ -34,7 +34,6 @@ const AddLocation = () => {
       type: "UPDATE_LOCATION",
       payload: { lng: latlng.lng, lat: latlng.lat },
     });
-    // console.log(latlng);
   };
 
   const handleSearch = async () => {

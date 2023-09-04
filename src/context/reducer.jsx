@@ -31,7 +31,10 @@ const reducer = (state, action) => {
       return { ...state, details: { ...state.details, ...action.payload } };
 
     case "UPDATE_LOCATION":
-      return { ...state, location: action.payload };
+      return {
+        ...state,
+        location: action.payload,
+      };
 
     case "RESET_POST":
       return {
@@ -42,7 +45,7 @@ const reducer = (state, action) => {
       };
 
     case "UPDATE_POSTS":
-      return { ...state, posts: action.payload };
+      return { ...state, posts: action.payload, filteredPosts: action.payload };
 
     default:
       throw new Error("Acción inválida!");

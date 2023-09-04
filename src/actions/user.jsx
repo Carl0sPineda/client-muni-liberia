@@ -32,6 +32,14 @@ export const login = async (user, dispatch) => {
   if (result) {
     dispatch({ type: "UPDATE_USER", payload: result });
     dispatch({ type: "CLOSE_LOGIN" });
+    dispatch({
+      type: "UPDATE_ALERT",
+      payload: {
+        open: true,
+        severity: "success",
+        message: "Inicio de sesión realizado con éxito",
+      },
+    });
   }
 
   dispatch({ type: "END_LOADING" });
@@ -72,7 +80,6 @@ export const updateProfile = async (currentUser, updatedFields, dispatch) => {
         message: error.message,
       },
     });
-    console.log(error);
   }
 
   dispatch({ type: "END_LOADING" });

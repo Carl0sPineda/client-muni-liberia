@@ -17,6 +17,7 @@ const initialState = {
   details: { title: "", description: "" },
   location: { lat: 0, lng: 0 },
   posts: [],
+  filteredPosts: [],
 };
 
 const Context = createContext(initialState);

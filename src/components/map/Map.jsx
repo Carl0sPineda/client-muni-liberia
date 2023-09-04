@@ -40,19 +40,13 @@ const Map = () => {
           </BaseLayer>
         </LayersControl>
         {posts.map((post) => (
-          <Marker
-            key={post._id}
-            position={[post.lat, post.lng]}
-            onClick={() => {
-              const zoomLevel = 12; // Define el nivel de zoom que deseas al hacer clic en un marcador
-              flyTo([post.lat, post.lng], zoomLevel);
-            }}
-          >
+          <Marker key={post._id} position={[post.lat, post.lng]}>
             <Popup>
               {post.title}
               <img
                 height="170px"
                 width="300px"
+                loading="lazy"
                 src={post.images}
                 alt={post.title}
               />
