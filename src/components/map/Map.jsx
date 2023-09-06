@@ -1,6 +1,6 @@
 import { useValue } from "../../context/ContextProvider";
 import { getPosts } from "../../actions/post";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Box } from "@mui/material";
 import {
   MapContainer,
@@ -12,6 +12,7 @@ import {
 
 const Map = () => {
   const { BaseLayer } = LayersControl;
+  const mapRef = useRef(null);
   const center = [10.6357, -85.4365];
   const {
     state: { posts },
@@ -22,15 +23,23 @@ const Map = () => {
     getPosts(dispatch);
   }, []);
 
-  const handleFlyToMarker = (e) => {
-    e.target._map.flyTo(e.target.getLatLng(), 16, {
-      duration: 3,
-    });
+  const handleFlyToMarker = (lat, lng) => {
+    const shouldFly = true;
+    if (shouldFly && mapRef.current) {
+      mapRef.current.flyTo([lat, lng], 18, {
+        duration: 3,
+      });
+    }
   };
 
   return (
     <Box sx={{ height: "90vh" }}>
-      <MapContainer center={center} zoom={9} style={{ height: "100%" }}>
+      <MapContainer
+        center={center}
+        zoom={9}
+        style={{ height: "100%" }}
+        ref={mapRef}
+      >
         <LayersControl position="topleft">
           <BaseLayer checked name="Por defecto">
             <TileLayer
@@ -46,11 +55,7 @@ const Map = () => {
           </BaseLayer>
         </LayersControl>
         {posts.map((post) => (
-          <Marker
-            key={post._id}
-            position={[post.lat, post.lng]}
-            eventHandlers={{ click: handleFlyToMarker }}
-          >
+          <Marker key={post._id} position={[post.lat, post.lng]}>
             <Popup>
               {post.title}
               <img
@@ -60,6 +65,11 @@ const Map = () => {
                 src={post.images}
                 alt={post.title}
               />
+              <div>
+                <button onClick={() => handleFlyToMarker(post.lat, post.lng)}>
+                  Ir
+                </button>
+              </div>
             </Popup>
           </Marker>
         ))}
