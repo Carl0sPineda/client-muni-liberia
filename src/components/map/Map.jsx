@@ -22,6 +22,12 @@ const Map = () => {
     getPosts(dispatch);
   }, []);
 
+  const handleFlyToMarker = (e) => {
+    e.target._map.flyTo(e.target.getLatLng(), 16, {
+      duration: 3,
+    });
+  };
+
   return (
     <Box sx={{ height: "90vh" }}>
       <MapContainer center={center} zoom={9} style={{ height: "100%" }}>
@@ -40,7 +46,11 @@ const Map = () => {
           </BaseLayer>
         </LayersControl>
         {posts.map((post) => (
-          <Marker key={post._id} position={[post.lat, post.lng]}>
+          <Marker
+            key={post._id}
+            position={[post.lat, post.lng]}
+            eventHandlers={{ click: handleFlyToMarker }}
+          >
             <Popup>
               {post.title}
               <img
