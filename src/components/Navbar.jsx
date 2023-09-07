@@ -20,7 +20,7 @@ const NavBar = () => {
 
   return (
     <>
-      <AppBar>
+      <AppBar sx={{ background: "#063970" }}>
         <Container maxWidth="lg">
           <Toolbar disableGutters>
             <Box sx={{ mr: 1 }}>
