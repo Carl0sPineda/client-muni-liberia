@@ -59,14 +59,9 @@ const BottomNav = () => {
         >
           <BottomNavigationAction label="Mapa" icon={<LocationOn />} />
           <BottomNavigationAction label="Fotos" icon={<CollectionsIcon />} />
-          <BottomNavigationAction
-            label="Añadir"
-            icon={<AddLocationAlt />}
-            // style={{
-            //   display:
-            //     currentUser?.name === "Carlos Pineda " ? "block" : "none",
-            // }}
-          />
+          {currentUser?.name === "Carlos Pineda Z" && (
+            <BottomNavigationAction label="Añadir" icon={<AddLocationAlt />} />
+          )}
         </BottomNavigation>
       </Paper>
     </Box>
