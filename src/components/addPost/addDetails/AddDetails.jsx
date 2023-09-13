@@ -14,14 +14,32 @@ const AddDetails = () => {
 
   const modules = {
     toolbar: [
-      [{ header: "1" }, { header: "2" }, { font: [] }],
+      ["bold", "italic", "underline", "strike"], // toggled buttons
+      ["blockquote"],
+
+      [{ header: 1 }, { header: 2 }], // custom button values
       [{ list: "ordered" }, { list: "bullet" }],
-      ["bold", "italic", "underline"],
-      ["image", "link"],
+      [{ script: "sub" }, { script: "super" }], // superscript/subscript
+      [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+      [{ direction: "rtl" }], // text direction
+
+      //[{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+      [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+      [{ font: [] }],
       [{ align: [] }],
-      ["clean"],
+
+      ["clean"], // remove formatting button
     ],
   };
+
+  // [{ header: "1" }, { header: "2" }, { font: [] }],
+  // [{ list: "ordered" }, { list: "bullet" }],
+  // ["bold", "italic", "underline"],
+  // ["image", "link"],
+  // [{ align: [] }],
+  // ["clean"],
 
   const handleQuillChange = (content) => {
     // Actualiza el estado de la descripción utilizando la acción "UPDATE_DETAILS"
@@ -42,11 +60,12 @@ const AddDetails = () => {
         mainProps={{ name: "title", label: "Título", value: title }}
         minLength={5}
       />
-      <Box sx={{ mb: 7 }}>
+      <Box sx={{ mb: 9 }}>
         <ReactQuill
           theme="snow"
-          style={{ height: "300px", marginBottom: "3px" }}
-          placeholder={"Descripción del sitio"}
+          className="react-quill" // Aplicamos la clase CSS aquí
+          style={{ height: "300px", width: "70vw", marginBottom: "3px" }}
+          placeholder={"Añade una descripción"}
           modules={modules}
           value={description}
           onChange={handleQuillChange}
