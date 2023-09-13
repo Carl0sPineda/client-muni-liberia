@@ -18,6 +18,7 @@ const initialState = {
   location: { lat: 0, lng: 0 },
   posts: [],
   filteredPosts: [],
+  post: null,
 };
 
 const Context = createContext(initialState);

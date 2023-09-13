@@ -47,6 +47,9 @@ const reducer = (state, action) => {
     case "UPDATE_POSTS":
       return { ...state, posts: action.payload, filteredPosts: action.payload };
 
+    case "UPDATE_POST":
+      return { ...state, post: action.payload };
+
     default:
       throw new Error("Acción inválida!");
   }
