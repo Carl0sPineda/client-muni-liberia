@@ -2,7 +2,6 @@ body{
     margin: 0;
 }
 
-/* Estilo para dispositivos móviles */
 @media (max-width: 768px) {
     .react-quill {
       width: 90vw !important;

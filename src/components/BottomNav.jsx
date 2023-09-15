@@ -46,8 +46,8 @@ const BottomNav = () => {
           left: 0,
           right: 0,
           zIndex: 9999,
-          // width: { xs: "100%", sm: "100%", md: "500px" }, // Ancho diferente para diferentes resoluciones
-          // maxWidth: { xs: "none", sm: "none", md: "500px" }, // Máximo ancho para dispositivos de escritorio
+          // width: { xs: "100%", sm: "100%", md: "400px" }, // Ancho diferente para diferentes resoluciones
+          // maxWidth: { xs: "none", sm: "none", md: "400px" }, // Máximo ancho para dispositivos de escritorio
           // marginLeft: "auto", // Centra horizontalmente en escritorio
           // marginRight: "auto", // Centra horizontalmente en escritorio
         }}
@@ -58,7 +58,10 @@ const BottomNav = () => {
           onChange={(e, newValue) => setValue(newValue)}
         >
           <BottomNavigationAction label="Mapa" icon={<LocationOn />} />
-          <BottomNavigationAction label="Fotos" icon={<CollectionsIcon />} />
+          <BottomNavigationAction
+            label="Atracciones"
+            icon={<CollectionsIcon />}
+          />
           {currentUser?.name === "Carlos Pineda Z" && (
             <BottomNavigationAction label="Añadir" icon={<AddLocationAlt />} />
           )}

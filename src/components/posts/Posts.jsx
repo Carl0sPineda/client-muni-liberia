@@ -10,6 +10,7 @@ import { useValue } from "../../context/ContextProvider";
 const Posts = () => {
   const {
     state: { filteredPosts },
+    dispatch,
   } = useValue();
 
   return (
@@ -30,6 +31,7 @@ const Posts = () => {
                 alt={post.title}
                 loading="lazy"
                 style={{ cursor: "pointer" }}
+                onClick={() => dispatch({ type: "UPDATE_POST", payload: post })}
               />
               <ImageListItemBar title={post.title} />
             </ImageListItem>
