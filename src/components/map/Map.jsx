@@ -9,7 +9,6 @@ import {
   Popup,
   LayersControl,
 } from "react-leaflet";
-// import PopupPost from "./PopupPost";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import CallMissedOutgoingOutlinedIcon from "@mui/icons-material/CallMissedOutgoingOutlined";
 import HomeIcon from "@mui/icons-material/Home";
@@ -59,9 +58,9 @@ const Map = () => {
 
   const customIcon = new L.Icon({
     iconUrl: pin, // Reemplaza con la ruta de tu ícono personalizado
-    iconSize: [64, 64], // Tamaño del ícono
-    iconAnchor: [50, 50], // Punto de anclaje del ícono
-    popupAnchor: [-20, -50], // Punto de anclaje del Popup
+    iconSize: [30, 30], // Tamaño del ícono
+    iconAnchor: [30, 30], // Punto de anclaje del ícono
+    popupAnchor: [-15, -35], // Punto de anclaje del Popup
   });
 
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
