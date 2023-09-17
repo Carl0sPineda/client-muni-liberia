@@ -95,33 +95,34 @@ const Map = () => {
 
   return (
     <Box sx={{ height: "90vh" }}>
-      <Button
-        variant="contained"
-        sx={{
+      <button
+        style={{
           color: "black",
           backgroundColor: "white",
           height: "50px",
-          width: "20px",
+          width: "50px",
           position: "absolute",
           top: "205px",
+          cursor: "pointer",
           left: "10px",
           zIndex: 1000,
           "&:hover": {
             backgroundColor: "white",
           },
+          border: "none",
         }}
         onClick={getUserLocation}
       >
         <MyLocationIcon />
-      </Button>
+      </button>
 
-      <Button
-        variant="contained"
-        sx={{
+      <button
+        style={{
           color: "black",
           backgroundColor: "white",
           height: "50px",
-          width: "20px",
+          width: "50px",
+          cursor: "pointer",
           position: "absolute",
           top: "265px", // Ajusta la posición vertical según tu diseño
           left: "10px",
@@ -129,11 +130,12 @@ const Map = () => {
           "&:hover": {
             backgroundColor: "white",
           },
+          border: "none",
         }}
         onClick={() => handleZoomToLevel(10, [10.6357, -85.4365])}
       >
         <HomeIcon />
-      </Button>
+      </button>
 
       <MapContainer
         center={center}
@@ -175,9 +177,10 @@ const Map = () => {
           <Marker key={post._id} position={[post.lat, post.lng]}>
             <Popup>
               <div style={{ textAlign: "center" }}>
-                <h2>{post.title}</h2>
+                <h2 className="font-s">{post.title}</h2>
               </div>
               <img
+                className="img-size"
                 height="170px"
                 width="300px"
                 loading="lazy"
@@ -186,48 +189,50 @@ const Map = () => {
                 // alt={post.title}
                 onClick={() => dispatch({ type: "UPDATE_POST", payload: post })}
               />
-              {userLocation && (
-                <div>
-                  <p>
-                    Distancia desde mi ubicación actual:{" "}
-                    {calculateDistance(
-                      userLocation.lat,
-                      userLocation.lng,
-                      post.lat,
-                      post.lng
-                    ).toFixed(2)}{" "}
-                    km
-                  </p>
-                  <p>
-                    Tiempo estimado en llegar:{" "}
-                    {estimateTime(
-                      calculateDistance(
+              <div>
+                {userLocation && (
+                  <div>
+                    <p className="font-s">
+                      Distancia desde mi ubicación actual:{" "}
+                      {calculateDistance(
                         userLocation.lat,
                         userLocation.lng,
                         post.lat,
                         post.lng
-                      ),
-                      50
-                    ).toFixed(0)}{" "}
-                    minutos
-                  </p>
-                </div>
-              )}
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <Button
-                  variant="contained"
-                  sx={{
-                    width: "100px",
-                    backgroundColor: "black",
-                    "&:hover": {
+                      ).toFixed(2)}{" "}
+                      km
+                    </p>
+                    <p className="font-s">
+                      Tiempo estimado en llegar:{" "}
+                      {estimateTime(
+                        calculateDistance(
+                          userLocation.lat,
+                          userLocation.lng,
+                          post.lat,
+                          post.lng
+                        ),
+                        50
+                      ).toFixed(0)}{" "}
+                      minutos
+                    </p>
+                  </div>
+                )}
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      width: "100px",
                       backgroundColor: "black",
-                    },
-                  }}
-                  onClick={() => handleFlyToMarker(post.lat, post.lng)}
-                >
-                  Zoom
-                  <CallMissedOutgoingOutlinedIcon />
-                </Button>
+                      "&:hover": {
+                        backgroundColor: "black",
+                      },
+                    }}
+                    onClick={() => handleFlyToMarker(post.lat, post.lng)}
+                  >
+                    Zoom
+                    <CallMissedOutgoingOutlinedIcon />
+                  </Button>
+                </div>
               </div>
             </Popup>
           </Marker>
