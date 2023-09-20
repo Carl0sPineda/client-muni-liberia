@@ -8,6 +8,7 @@ import {
   Marker,
   Popup,
   LayersControl,
+  ZoomControl,
 } from "react-leaflet";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import CallMissedOutgoingOutlinedIcon from "@mui/icons-material/CallMissedOutgoingOutlined";
@@ -104,7 +105,7 @@ const Map = () => {
           position: "absolute",
           top: "205px",
           cursor: "pointer",
-          left: "10px",
+          right: "10px",
           zIndex: 1000,
           "&:hover": {
             backgroundColor: "white",
@@ -125,7 +126,7 @@ const Map = () => {
           cursor: "pointer",
           position: "absolute",
           top: "265px", // Ajusta la posición vertical según tu diseño
-          left: "10px",
+          right: "10px",
           zIndex: 1000,
           "&:hover": {
             backgroundColor: "white",
@@ -142,8 +143,11 @@ const Map = () => {
         zoom={10}
         style={{ height: "100%" }}
         ref={mapRef}
+        zoomControl={false}
       >
-        <LayersControl position="topleft">
+        <ZoomControl position="topright" />
+
+        <LayersControl position="topright">
           <BaseLayer checked name="Por defecto">
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -158,12 +162,6 @@ const Map = () => {
           </BaseLayer>
         </LayersControl>
         {userLocation && (
-          // <Circle
-          //   center={userLocation}
-          //   radius={1000} // Define el radio en metros
-          //   fillColor="blue" // Color de relleno del círculo
-          //   fillOpacity={0.2} // Opacidad del relleno
-          // >
           <Marker position={userLocation} icon={customIcon}>
             <Popup>
               <div>
@@ -171,7 +169,6 @@ const Map = () => {
               </div>
             </Popup>
           </Marker>
-          // </Circle>
         )}
         {posts.map((post) => (
           <Marker key={post._id} position={[post.lat, post.lng]}>
@@ -186,7 +183,6 @@ const Map = () => {
                 loading="lazy"
                 src={post.images}
                 style={{ cursor: "pointer" }}
-                // alt={post.title}
                 onClick={() => dispatch({ type: "UPDATE_POST", payload: post })}
               />
               <div>
