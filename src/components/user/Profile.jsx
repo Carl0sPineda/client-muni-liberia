@@ -25,16 +25,6 @@ const Profile = () => {
     dispatch({ type: "UPDATE_PROFILE", payload: { ...profile, open: false } });
   };
 
-  //   const handleChange = (e) => {
-  //     const file = e.target.files[0];
-  //     if (file) {
-  //       const photoURL = URL.createObjectURL(file);
-  //       dispatch({
-  //         type: "UPDATE_PROFILE",
-  //         payload: { ...profile, file, photoURL },
-  //       });
-  //     }
-  //   };
   const handleSubmit = (e) => {
     e.preventDefault();
     const name = nameRef.current.value;

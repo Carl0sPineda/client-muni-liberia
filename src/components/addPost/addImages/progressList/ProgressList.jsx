@@ -1,15 +1,14 @@
-import { ImageList } from '@mui/material';
-import React from 'react';
-import ProgressItem from './ProgressItem';
+import { ImageList } from "@mui/material";
+import ProgressItem from "./ProgressItem";
 
 const ProgressList = ({ files }) => {
   return (
     <ImageList
       rowHeight={250}
       sx={{
-        '&.MuiImageList-root': {
+        "&.MuiImageList-root": {
           gridTemplateColumns:
-            'repeat(auto-fill, minmax(250px, 1fr))!important',
+            "repeat(auto-fill, minmax(250px, 1fr))!important",
         },
       }}
     >

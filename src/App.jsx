@@ -2,26 +2,41 @@ import Loading from "./components/Loading";
 import Navbar from "./components/Navbar";
 import Notification from "./components/Notification";
 import Login from "./components/user/Login";
-import BottomNav from "./components/BottomNav";
 import Post from "./components/posts/Post";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Map from "./components/map/Map";
+import AddPost from "./components/addPost/AddPost";
+import NotFound from "./pages/NotFound";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useValue } from "./context/ContextProvider";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 const App = () => {
+  const {
+    state: { currentUser },
+  } = useValue();
+
   return (
     <>
-      <Loading />
-      <Notification />
-      <Navbar />
-      <BottomNav />
-      <Login />
-      <Post />
-      {/* <BrowserRouter>
+      <BrowserRouter>
+        <Loading />
+        <Notification />
+        <Navbar />
+        <Login />
         <Routes>
-          <Route path="/" element={<BottomNav />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/post" element={<Post />} />
+          <Route path="/" element={<Map />} />
+          <Route
+            path="/add"
+            element={currentUser?.role === "admin" ? <AddPost /> : <Map />}
+          />
+          {/* <Route path="/add/:id" element={<AddPost />} /> */}
+          <Route path="/post/:id" element={<Post />} />
+          <Route
+            path="/dashboard/*"
+            element={currentUser?.role === "admin" ? <Dashboard /> : <Map />}
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </>
   );
 };

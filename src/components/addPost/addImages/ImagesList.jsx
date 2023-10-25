@@ -5,7 +5,6 @@ import {
   ImageListItem,
   ImageListItemBar,
 } from "@mui/material";
-import React from "react";
 import { useValue } from "../../../context/ContextProvider";
 import deleteFile from "../../../firebase/deleteFile";
 

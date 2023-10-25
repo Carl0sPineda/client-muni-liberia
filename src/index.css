@@ -1,5 +1,6 @@
-body{
+*{
     margin: 0;
+    padding: 0;
 }
 
 @media (max-width: 768px) {
@@ -18,18 +19,225 @@ body{
     }
   }
 
-  .ejmj{
-    display: flex;
-    flex-direction: column;
-    max-width: 420px;
-    padding: 20px;
-    background: rgb(255, 255, 255);
-    margin: 20px auto;
-    border: 1px solid #eee;
-    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.06);
-  }
-
   .leaflet-left{
     display: none;
   }
-  
+
+  .leaflet-popup-content-wrapper {
+    padding: 0;
+    box-shadow: none !important;
+    background: none !important; /* Fondo transparente */
+  }
+  .leaflet-popup-content {
+    margin: 0;
+    /* text-align: center; Alinea el texto al centro */
+  }
+  .leaflet-popup-tip-container, a.leaflet-popup-close-button {
+    display: none;
+  }
+  /* Estilo para la imagen dentro del popup */
+  .popup-image-container {
+    position: relative;
+    width: 400px; /* Ancho máximo */
+    height: 300px; /* Alto máximo */
+  }
+  .popup-image {
+    width: 350px; /* Ancho máximo */
+    height: 250px;
+    border-radius: 0.5rem;
+    object-fit: cover;
+  }
+
+  .popup-text {
+    position: absolute;
+    bottom: 10%;
+    left: 44%;
+    width: 300px;
+    font-weight: bold;
+    transform: translateX(-50%);
+    color: white; /* Color del texto */
+    font-size: 12px; /* Tamaño del texto */
+    background: rgba(0, 0, 0, 0.7); /* Fondo semitransparente */
+    padding: 5px 10px; /* Espaciado interno del texto */
+    border-radius: 4px; /* Bordes redondeados */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
+  }
+
+ /* Card Container */
+.root {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  border-radius: 15px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Card Styles */
+.card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(126, 27, 27, 0.1);
+  transition: transform 0.2s;
+  width: 300px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-image img {
+  width: 100%;
+  height: 200px;
+  cursor: pointer;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.title {
+  font-size: 1em;
+  margin: 0;
+  color: #333;
+  text-align: center;
+}
+
+/* Estilos para navegadores que admiten scrollbar personalizado */
+/* Cambia el grosor del scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Cambia el color de fondo del scrollbar */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Cambia el color del scrollbar */
+::-webkit-scrollbar-thumb {
+  background: #b6b1b1;
+}
+
+
+/* Estilo para el contenedor de la página */
+.page-container {
+  min-height: 100vh;
+}
+
+/* Estilo para el contenido principal */
+.page-container > * {
+  flex-grow: 1;
+}
+
+/* Estilo para el footer */
+.footer {
+  background: black;
+  color: white;
+  padding: 10px 0; /* Ajusta el padding según sea necesario */
+}
+
+/* Estilo para el contenido dentro del footer */
+.footer .container {
+  padding-inline: 10px;
+}
+
+/* Estilo para el footer en la parte inferior */
+.footer-bottom {
+  background: black;
+}
+
+.copyright {
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* CSS */
+.bg-overlay {
+  background-color: #FFF; /* Fondo con opacidad */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.no-hover-button:hover {
+  background: #DB4437 !important; /* Mantén el fondo del botón como deseas en el estado normal */
+  color: white !important; /* Mantén el color de texto como deseas en el estado normal */
+}
+
+
+/* 404 styles */
+
+.content-404{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Montserrat";
+  color: rgb(56,56,56);
+  margin-bottom: 40px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.wrapper h1 {
+  font-size: 3rem;
+  margin-top: 20px;
+}
+.wrapper .message {
+  font-size: 1.5rem;
+  padding: 20px;
+  width: 60%;
+  text-align: center;
+}
+.wrapper .btn-404 {
+  background: rgb(0,195,154);
+  padding: 20px;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #fff;
+  border: none;
+}
+.wrapper .btn-404:hover {background: rgb(0,231,201);}
+
+/* Add media query for screens smaller than 600px */
+@media (max-width: 600px) {
+  .wrapper h1 {
+  font-size: 2rem;
+  margin-top: 10px;
+}
+  .svg-404{
+    height: 300px;
+    width: 300px;
+  }
+  .wrapper .message {
+  font-size: 1rem;
+}
+  .wrapper .btn-404{
+    font-size: 1rem;
+    padding: 15px;
+  }
+}
+

@@ -11,11 +11,13 @@ import {
   ZoomControl,
 } from "react-leaflet";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
-import CallMissedOutgoingOutlinedIcon from "@mui/icons-material/CallMissedOutgoingOutlined";
+import { useNavigate } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
+import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import pin from "../../assets/pin.svg";
 
 const Map = () => {
+  const navigate = useNavigate();
   const { BaseLayer } = LayersControl;
   const mapRef = useRef(null);
   const [userLocation, setUserLocation] = useState(null);
@@ -95,7 +97,7 @@ const Map = () => {
   };
 
   return (
-    <Box sx={{ height: "90vh" }}>
+    <Box sx={{ height: "90vh", marginTop: "2px" }}>
       <button
         style={{
           color: "black",
@@ -173,23 +175,21 @@ const Map = () => {
         {posts.map((post) => (
           <Marker key={post._id} position={[post.lat, post.lng]}>
             <Popup>
-              <div style={{ textAlign: "center" }}>
-                <h2 className="font-s">{post.title}</h2>
-              </div>
-              <img
-                className="img-size"
-                height="170px"
-                width="300px"
-                loading="lazy"
-                src={post.images}
-                style={{ cursor: "pointer" }}
-                onClick={() => dispatch({ type: "UPDATE_POST", payload: post })}
-              />
-              <div>
-                {userLocation && (
-                  <div>
-                    <p className="font-s">
-                      Distancia desde mi ubicación actual:{" "}
+              <div className="popup-image-container">
+                <img
+                  className="popup-image"
+                  height="170px"
+                  width="300px"
+                  loading="lazy"
+                  src={post.images}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate(`/post/${post._id}`)}
+                />
+                <div className="popup-text">
+                  <h3 style={{ marginTop: "5px" }}>{post.title}</h3>
+                  {userLocation && (
+                    <>
+                      Distancia desde mi ubicación:{" "}
                       {calculateDistance(
                         userLocation.lat,
                         userLocation.lng,
@@ -197,8 +197,7 @@ const Map = () => {
                         post.lng
                       ).toFixed(2)}{" "}
                       km
-                    </p>
-                    <p className="font-s">
+                      <br />
                       Tiempo estimado en llegar:{" "}
                       {estimateTime(
                         calculateDistance(
@@ -210,23 +209,24 @@ const Map = () => {
                         50
                       ).toFixed(0)}{" "}
                       minutos
-                    </p>
-                  </div>
-                )}
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                    </>
+                  )}
+                  <br />
                   <Button
-                    variant="contained"
                     sx={{
-                      width: "100px",
-                      backgroundColor: "black",
+                      position: "absolute",
+                      bottom: "25%",
+                      left: "80%",
+                      width: "10px",
+                      color: "white",
+                      backgroundColor: "none",
                       "&:hover": {
-                        backgroundColor: "black",
+                        backgroundColor: "none",
                       },
                     }}
                     onClick={() => handleFlyToMarker(post.lat, post.lng)}
                   >
-                    Zoom
-                    <CallMissedOutgoingOutlinedIcon />
+                    <ZoomInIcon />
                   </Button>
                 </div>
               </div>

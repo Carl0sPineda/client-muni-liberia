@@ -7,12 +7,12 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDUe2FQnusS92kXe0nyTZDPkf2HR50QxVg",
-  authDomain: "travel-3eb3d.firebaseapp.com",
-  projectId: "travel-3eb3d",
-  storageBucket: "travel-3eb3d.appspot.com",
-  messagingSenderId: "452492883871",
-  appId: "1:452492883871:web:04df6128c95fb5909bafaa",
+  apiKey: "AIzaSyDoi2zKCiV8NAQHLoIJfxpF0aZUdSPU1qc",
+  authDomain: "muni-liberia.firebaseapp.com",
+  projectId: "muni-liberia",
+  storageBucket: "muni-liberia.appspot.com",
+  messagingSenderId: "581781470755",
+  appId: "1:581781470755:web:2add945dfbefe195743b96",
 };
 
 // Initialize Firebase

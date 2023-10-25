@@ -1,11 +1,12 @@
-import { Logout, Settings } from "@mui/icons-material";
+import { Logout, Settings, Dashboard } from "@mui/icons-material";
 import { ListItemIcon, Menu, MenuItem } from "@mui/material";
-import React from "react";
 import { useValue } from "../../context/ContextProvider";
 import useCheckToken from "../../hooks/useCheckToken";
 import Profile from "./Profile";
+import { useNavigate } from "react-router-dom";
 
 const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
+  const navigate = useNavigate();
   useCheckToken();
   const {
     dispatch,
@@ -30,8 +31,6 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
                 type: "UPDATE_PROFILE",
                 payload: {
                   open: true,
-                  file: null,
-                  photoURL: currentUser?.photoURL,
                 },
               })
             }
@@ -42,6 +41,15 @@ const UserMenu = ({ anchorUserMenu, setAnchorUserMenu }) => {
             Perfil
           </MenuItem>
         )}
+        {currentUser?.role === "admin" && (
+          <MenuItem onClick={() => navigate("/dashboard")}>
+            <ListItemIcon>
+              <Dashboard fontSize="small" />
+            </ListItemIcon>
+            Dashboard
+          </MenuItem>
+        )}
+
         <MenuItem
           onClick={() => dispatch({ type: "UPDATE_USER", payload: null })}
         >

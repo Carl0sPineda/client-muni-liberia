@@ -7,19 +7,22 @@ import {
   StepButton,
   Stepper,
 } from "@mui/material";
-import { Send } from "@mui/icons-material";
+import { Cancel, Send } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useValue } from "../../context/ContextProvider";
 import AddDetails from "./addDetails/AddDetails";
 import AddImages from "./addImages/AddImages";
 import AddLocation from "./addLocation/AddLocation";
-import { createPost } from "../../actions/post";
+import { createPost, updatePost } from "../../actions/post";
+import { useNavigate } from "react-router-dom";
 
 const AddPost = ({ setPage }) => {
   const {
-    state: { images, details, location, currentUser },
+    state: { images, details, location, currentUser, updatedPost },
     dispatch,
   } = useValue();
+
+  const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [steps, setSteps] = useState([
     { label: "Ubicación", completed: false },
@@ -88,7 +91,15 @@ const AddPost = ({ setPage }) => {
       description: details.description,
       images,
     };
+    if (updatedPost) {
+      navigate("/dashboard/posts");
+      return updatePost(post, currentUser, dispatch, updatedPost);
+    }
     createPost(post, currentUser, dispatch, setPage);
+  };
+
+  const handleCancel = () => {
+    navigate("/dashboard/posts");
   };
 
   useEffect(() => {
@@ -135,17 +146,33 @@ const AddPost = ({ setPage }) => {
             Siguiente
           </Button>
         </Stack>
-        {showSubmit && (
-          <Stack sx={{ alignItems: "center" }}>
+
+        <Stack
+          sx={{
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 2,
+            direction: "row",
+          }}
+        >
+          {showSubmit && (
             <Button
               variant="contained"
               endIcon={<Send />}
               onClick={handleSubmit}
             >
-              Enviar
+              {updatedPost ? "Actualizar" : "Agregar"}
             </Button>
-          </Stack>
-        )}
+          )}
+
+          <Button
+            variant="outlined"
+            endIcon={<Cancel />}
+            onClick={handleCancel}
+          >
+            Cancelar
+          </Button>
+        </Stack>
       </Box>
     </Container>
   );

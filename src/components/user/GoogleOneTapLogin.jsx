@@ -46,14 +46,20 @@ const GoogleOneTapLogin = () => {
   };
 
   return (
-    <Button
-      variant="outlined"
-      startIcon={<Google />}
-      disabled={disabled}
-      onClick={handleGoogleLogin}
-    >
-      Login con Google
-    </Button>
+    <></>
+    // <Button
+    //   sx={{
+    //     color: "white",
+    //     background: "#DB4437",
+    //   }}
+    //   variant="outlined"
+    //   startIcon={<Google sx={{ color: "white" }} />}
+    //   disabled={disabled}
+    //   onClick={handleGoogleLogin}
+    //   className="no-hover-button"
+    // >
+    //   Continua con Google
+    // </Button>
   );
 };
 

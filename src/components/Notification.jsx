@@ -1,5 +1,4 @@
 import { Alert, Snackbar } from "@mui/material";
-import React from "react";
 import { useValue } from "../context/ContextProvider";
 
 const Notification = () => {
@@ -17,7 +16,7 @@ const Notification = () => {
       open={alert.open}
       autoHideDuration={4000}
       onClose={handleClose}
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
     >
       <Alert
         onClose={handleClose}

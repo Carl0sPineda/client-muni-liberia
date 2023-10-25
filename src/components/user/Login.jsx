@@ -11,9 +11,9 @@ import {
 } from "@mui/material";
 import { useValue } from "../../context/ContextProvider";
 import { useEffect, useRef, useState } from "react";
-import { Close, Send } from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
 import PasswordField from "./PasswordField";
-import GoogleOneTapLogin from "./GoogleOneTapLogin";
+// import GoogleOneTapLogin from "./GoogleOneTapLogin";
 import { login, register } from "../../actions/user";
 
 const Login = () => {
@@ -68,12 +68,18 @@ const Login = () => {
   };
 
   useEffect(() => {
-    isRegister ? setTitle("Registrate") : setTitle("Login");
+    isRegister ? setTitle("Registrate") : setTitle("Inicio de sesión");
   }, [isRegister]);
 
   return (
     <ColoredDialog open={openLogin} onClose={handleClose}>
-      <DialogTitle>
+      <DialogTitle
+        sx={{
+          background:
+            "linear-gradient(to bottom, #556681, #424f63, #303946, #1f242b, #0d0f12)",
+          color: "white",
+        }}
+      >
         {title}
         <IconButton
           sx={{
@@ -125,8 +131,15 @@ const Login = () => {
           )}
         </DialogContent>
         <DialogActions sx={{ px: "19px" }}>
-          <Button type="submit" variant="contained" endIcon={<Send />}>
-            Enviar
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              background: "#008f39",
+              "&:hover": { background: "#008f39" },
+            }}
+          >
+            {isRegister ? "Registrarse" : "Ingresar"}
           </Button>
         </DialogActions>
       </form>
@@ -139,7 +152,7 @@ const Login = () => {
         </Button>
       </DialogActions>
       <DialogActions sx={{ justifyContent: "center", py: "24px" }}>
-        <GoogleOneTapLogin />
+        {/* <GoogleOneTapLogin /> */}
       </DialogActions>
     </ColoredDialog>
   );

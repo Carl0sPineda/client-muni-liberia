@@ -20,7 +20,7 @@ const reducer = (state, action) => {
       return { ...state, currentUser: action.payload };
 
     case "UPDATE_IMAGES":
-      return { ...state, images: [...state.images, action.payload] };
+      return { ...state, images: [...state.images, ...action.payload] };
     case "DELETE_IMAGE":
       return {
         ...state,
@@ -42,6 +42,7 @@ const reducer = (state, action) => {
         images: [],
         details: { title: "", description: "" },
         location: { lng: 0, lat: 0 },
+        updatedPost: null,
       };
 
     case "UPDATE_POSTS":
@@ -49,6 +50,18 @@ const reducer = (state, action) => {
 
     case "UPDATE_POST":
       return { ...state, post: action.payload };
+
+    case "UPDATE_UPDATED_POST":
+      return { ...state, updatedPost: action.payload };
+
+    case "UPDATE_USERS":
+      return { ...state, users: action.payload };
+
+    case "DELETE_POST":
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== action.payload),
+      };
 
     default:
       throw new Error("Acción inválida!");
