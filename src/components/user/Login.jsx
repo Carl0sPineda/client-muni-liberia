@@ -106,7 +106,7 @@ const Login = () => {
               type="text"
               fullWidth
               inputRef={nameRef}
-              inputProps={{ minLength: 2 }}
+              inputProps={{ minLength: 2, maxLength: 50 }}
               required
             />
           )}
@@ -120,6 +120,9 @@ const Login = () => {
             fullWidth
             inputRef={emailRef}
             required
+            inputProps={{
+              maxLength: 50, // Establece la longitud máxima permitida
+            }}
           />
           <PasswordField {...{ passwordRef }} />
           {isRegister && (

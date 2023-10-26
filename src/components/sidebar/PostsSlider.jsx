@@ -69,6 +69,7 @@ const PostsSlider = () => {
           placeholder="Buscar una ubicación"
           value={titleFilter}
           onChange={handleTitleFilterChange}
+          maxLength={70} // Establece la longitud máxima permitida (cambiar a la longitud deseada)
         />
       </div>
       <div className="container">
