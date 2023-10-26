@@ -66,7 +66,6 @@
  /* Card Container */
 .root {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
   border-radius: 15px;
 }
 
@@ -91,7 +90,7 @@
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(126, 27, 27, 0.1);
   transition: transform 0.2s;
-  width: 300px;
+  width: 350px;
 }
 
 .card:hover {
