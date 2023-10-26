@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import {
   AppBar,
+  Avatar,
   Box,
   Button,
   Container,
@@ -15,6 +16,7 @@ import { useValue } from "../context/ContextProvider";
 import UserIcons from "./user/UserIcons";
 import Sidebar from "./sidebar/Sidebar";
 import { useNavigate, useLocation } from "react-router-dom";
+import muniLogo from "../assets/logo-muni.png";
 
 const NavBar = () => {
   const {
@@ -90,9 +92,10 @@ const NavBar = () => {
                 flexGrow: 1,
                 transition: "margin 0.3s ease",
                 display: { xs: "none", md: "flex" },
-                marginLeft: isOpen ? "300px" : "0px", // Aplicar marginLeft si isOpen es true
+                marginLeft: isOpen ? "270px" : "0px", // Aplicar marginLeft si isOpen es true
               }}
             >
+              <Avatar src={muniLogo} sx={{ marginRight: 2 }} />
               Sitios Históricos y Arquitectónicos Liberia
             </Typography>
             {!currentUser ? (
