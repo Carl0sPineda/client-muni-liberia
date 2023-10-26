@@ -114,6 +114,7 @@ const Map = () => {
           },
           border: "none",
         }}
+        aria-label="Obtener ubicación del usuario"
         onClick={getUserLocation}
       >
         <MyLocationIcon />
@@ -135,6 +136,7 @@ const Map = () => {
           },
           border: "none",
         }}
+        aria-label="Volver a la vista inicial"
         onClick={() => handleZoomToLevel(10, [10.6357, -85.4365])}
       >
         <HomeIcon />
@@ -224,6 +226,7 @@ const Map = () => {
                         backgroundColor: "none",
                       },
                     }}
+                    aria-label="Realizar zoom al elemento seleccionado"
                     onClick={() => handleFlyToMarker(post.lat, post.lng)}
                   >
                     <ZoomInIcon />

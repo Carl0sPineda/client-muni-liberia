@@ -79,6 +79,7 @@ const NavBar = () => {
                 size="large"
                 color="inherit"
                 onClick={() => setIsOpen(true)}
+                aria-label="Abrir menú"
               >
                 <Menu />
               </IconButton>
