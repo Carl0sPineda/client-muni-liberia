@@ -50,13 +50,21 @@ const AddLocation = () => {
 
       if (data.length > 0) {
         const { lat, lon } = data[0]; // Obtener las coordenadas de la primera coincidencia
-        mapRef.current.setView([parseFloat(lat), parseFloat(lon)], 10);
+        mapRef.current.setView([parseFloat(lat), parseFloat(lon)], 12);
         dispatch({
           type: "UPDATE_LOCATION",
           payload: { lng: parseFloat(lon), lat: parseFloat(lat) },
         });
       } else {
-        console.log("No se encontraron resultados");
+        // console.log("No se encontraron resultados");
+        dispatch({
+          type: "UPDATE_ALERT",
+          payload: {
+            open: true,
+            severity: "error",
+            message: "No se encontraron resultados",
+          },
+        });
       }
     } catch (error) {
       console.error("Error:", error);
@@ -88,7 +96,7 @@ const AddLocation = () => {
           }}
         >
           <TextField
-            label="Ingresa una ubicación"
+            label="Liberia Guanacaste"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             style={{ marginBottom: "8px" }}
