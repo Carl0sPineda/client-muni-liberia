@@ -12,13 +12,6 @@ import "./swiper.css";
 import axios from "axios";
 import Footer from "../Footer";
 import Spinner from "../Spinner";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  ZoomControl,
-} from "react-leaflet";
 import Aos from "aos";
 
 const Post = () => {
