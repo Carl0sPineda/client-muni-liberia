@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Box, TextField, Button } from "@mui/material";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { useValue } from "../../../context/ContextProvider";
+import pinre from "../../../assets/pin-re.svg";
 
 const AddLocation = () => {
   const {
@@ -26,6 +27,13 @@ const AddLocation = () => {
         });
     }
   }, []);
+
+  const customIconBlue = new L.Icon({
+    iconUrl: pinre, // Reemplaza con la ruta de tu ícono personalizado
+    iconSize: [40, 40], // Tamaño del ícono
+    iconAnchor: [40, 40], // Punto de anclaje del ícono
+    popupAnchor: [-15, -35], // Punto de anclaje del Popup
+  });
 
   const handleMarkerDragEnd = (event) => {
     const { target } = event;
@@ -109,6 +117,7 @@ const AddLocation = () => {
           position={[lat, lng]}
           draggable={true}
           eventHandlers={{ dragend: handleMarkerDragEnd }}
+          icon={customIconBlue}
         />
       </MapContainer>
     </Box>

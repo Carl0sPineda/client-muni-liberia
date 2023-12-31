@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import pin from "../../assets/pin.svg";
+import pinre from "../../assets/pin-re.svg";
 
 const Map = () => {
   const navigate = useNavigate();
@@ -63,6 +64,13 @@ const Map = () => {
     iconUrl: pin, // Reemplaza con la ruta de tu ícono personalizado
     iconSize: [30, 30], // Tamaño del ícono
     iconAnchor: [30, 30], // Punto de anclaje del ícono
+    popupAnchor: [-15, -35], // Punto de anclaje del Popup
+  });
+
+  const customIconBlue = new L.Icon({
+    iconUrl: pinre, // Reemplaza con la ruta de tu ícono personalizado
+    iconSize: [40, 40], // Tamaño del ícono
+    iconAnchor: [40, 40], // Punto de anclaje del ícono
     popupAnchor: [-15, -35], // Punto de anclaje del Popup
   });
 
@@ -175,7 +183,11 @@ const Map = () => {
           </Marker>
         )}
         {posts.map((post) => (
-          <Marker key={post._id} position={[post.lat, post.lng]}>
+          <Marker
+            key={post._id}
+            position={[post.lat, post.lng]}
+            icon={customIconBlue}
+          >
             <Popup>
               <div className="popup-image-container">
                 <img
